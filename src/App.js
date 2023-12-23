@@ -1,11 +1,15 @@
-import './App.css';
+import React from 'react';
+import "./App.css"
+import TransactionForm from "./components/TransactionForm";
+import Statistics from "./components/Statistics";
 
-function App() {
+const App = () => {
     return (
-        <div>
-            appd
+        <div className={"App"}>
+            <TransactionForm/>
+            <Statistics/>
         </div>
-    )
-}
+    );
+};
 
 export default App;
