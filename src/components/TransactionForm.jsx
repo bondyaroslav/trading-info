@@ -35,7 +35,7 @@ const TransactionForm = () => {
                 <label htmlFor="leverage">credit leveraging(x):</label>
                 <input type="number"/>
             </div>
-
+ 
             <div>
                 <label htmlFor="startDate">start date:</label>
                 <input type="date" name="startDate"/>
