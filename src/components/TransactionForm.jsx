@@ -25,6 +25,7 @@ const TransactionForm = () => {
                 </select>
             </div>
 
+
             <div>
                 <label htmlFor="capitalSize">capital size($):</label>
                 <input type="number" name="capitalSize" required/>
