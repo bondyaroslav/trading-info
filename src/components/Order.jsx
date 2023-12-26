@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "./Order.module.css"
 
-const Order = ({currencyPair, capitalSize, creditLeverage, startDate, endDate}) => {
+const Order = ({currencyPair, capitalSize, creditLeverage, startDate, endDate, strategyType, transactionType}) => {
 
     return (
         <div className={styles.order}>
@@ -10,6 +10,8 @@ const Order = ({currencyPair, capitalSize, creditLeverage, startDate, endDate}) 
             <p className={styles.order_argument}>{creditLeverage}</p>
             <p className={styles.order_argument}>{startDate}</p>
             <p className={styles.order_argument}>{endDate}</p>
+            <p className={styles.order_argument}>{strategyType}</p>
+            <p className={styles.order_argument}>{transactionType}</p>
         </div>
     );
 };
