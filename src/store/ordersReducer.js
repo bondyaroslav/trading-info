@@ -110,13 +110,13 @@ const ordersReducer = (state = initialState, action) => {
         case SET_ORDERS:
             return {
                 ...state,
-                orders: action.payload
+                orders: action.json
             }
         default: return state
     }
 }
 
-export const setOrdersAC = (payload) => ({type: SET_ORDERS, payload})
+export const setOrdersAC = (json) => ({type: SET_ORDERS, json})
 
 export default ordersReducer
 
