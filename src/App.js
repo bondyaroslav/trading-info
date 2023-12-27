@@ -5,7 +5,7 @@ import ContainerStatistics from "./components/ContainerStatistics";
 
 const App = () => {
     return (
-        <div className={"App"}>
+        <div className="App">
             <TransactionForm/>
             <ContainerStatistics/>
         </div>
