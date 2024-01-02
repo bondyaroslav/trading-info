@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import Order from "./Order";
 import {useSelector} from "react-redux";
 import constants from "../constants";
@@ -59,6 +60,13 @@ const Statistics = () => {
                 <p style={{width: 150}}>transaction type</p>
             </div>
             {mappedOrders}
+=======
+
+const Statistics = ({}) => {
+    return (
+        <div>
+            <h1>{}</h1>
+>>>>>>> f33f55bda55c0864ada68e5dc8a60a36c3fbfa0a
         </div>
     );
 };
