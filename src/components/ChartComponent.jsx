@@ -20,6 +20,7 @@ const ChartComponent = () => {
                 data: pricesData
             },
         ],
+
     };
 
     useEffect(() => {
