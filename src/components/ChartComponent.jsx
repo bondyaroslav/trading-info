@@ -2,53 +2,69 @@ import React, { useEffect, useRef } from 'react'
 import Chart from 'chart.js/auto'
 
 const ChartComponent = () => {
+    const symbol = 'BTCUSDT'
+    const endDate = new Date().getTime();
+    const startDate = endDate - (30 * 24 * 60 * 60 * 1000)
+
     const chartRef = useRef(null)
-    let myChart = null
-
-    const pricesData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
-    const data = {
-        labels: pricesData.map((_, i) => `element ${i + 1}`),
-        datasets: [
-            {
-                label: 'data',
-                backgroundColor: 'rgba(75,192,192,1)',
-                borderColor: 'rgba(0,0,0,1)',
-                borderWidth: 1,
-                hoverBackgroundColor: 'rgba(75,192,192,0.4)',
-                hoverBorderColor: 'rgba(0,0,0,1)',
-                data: pricesData
-            },
-        ],
-
-    };
+    const myChart = useRef(null)
 
     useEffect(() => {
-        const ctx = chartRef.current; // link to canvas object
+        const fetchData = async () => {
+            const url = `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1d&startTime=${startDate}&endTime=${endDate}`
 
-        if (myChart) {
-            myChart.destroy() // destroy previous chart
+            try {
+                const response = await fetch(url)
+                const data = await response.json()
+
+                const pricesData = data.map(item => item[1])
+
+                const ctx = chartRef.current
+
+                if (myChart.current) {
+                    myChart.current.destroy()
+                }
+
+                myChart.current = new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: pricesData.map((_, i) => `${pricesData[i]} ${i + 1}`),
+                        datasets: [
+                            {
+                                label: 'Data',
+                                backgroundColor: 'rgba(75,192,192,1)',
+                                borderColor: 'rgba(0,0,0,1)',
+                                borderWidth: 1,
+                                hoverBackgroundColor: 'rgba(75,192,192,0.4)',
+                                hoverBorderColor: 'rgba(0,0,0,1)',
+                                data: pricesData,
+                            },
+                        ],
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                            },
+                        },
+                    },
+                })
+            } catch (error) {
+                console.error('Error:', error)
+            }
         }
 
-        myChart = new Chart(ctx, {
-            type: 'bar',
-            data: data,
-            options: {
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                    },
-                },
-            },
-        })
-    }, [pricesData])
+        fetchData()
+
+        return () => {
+            if (myChart.current) {
+                myChart.current.destroy()
+            }
+        };
+    }, [startDate, endDate, symbol])
 
     return (
-        <div style={{
-            width: 500,
-            height: 500
-        }}>
+        <div style={{ width: 700 }}>
             <h2>Chart</h2>
             <canvas ref={chartRef} />
         </div>

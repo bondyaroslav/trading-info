@@ -1,11 +1,8 @@
-import React from 'react';
+import React from 'react'
 import "./App.css"
-import TransactionForm from "./components/TransactionForm";
-<<<<<<< HEAD
+import TransactionForm from "./components/TransactionForm"
+import ChartComponent from "./components/ChartComponent"
 import Statistics from "./components/Statistics";
-import ChartComponent from "./components/ChartComponent";
-
-
 
 const App = () => {
 
@@ -13,17 +10,8 @@ const App = () => {
         <div className="App">
             <TransactionForm/>
             <ChartComponent/>
-=======
-import ContainerStatistics from "./components/ContainerStatistics";
-
-const App = () => {
-    return (
-        <div className="App">
-            <TransactionForm/>
-            <ContainerStatistics/>
->>>>>>> f33f55bda55c0864ada68e5dc8a60a36c3fbfa0a
+            <Statistics/>
         </div>
-    );
-};
-
+    )
+}
 export default App;

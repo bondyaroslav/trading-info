@@ -6,16 +6,13 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-<<<<<<< HEAD
     "chart.js": "^4.4.1",
+    "chartjs-adapter-moment": "^1.0.1",
     "lightweight-charts": "^4.1.1",
+    "moment": "^2.30.1",
     "node-modules": "^1.0.1",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
-=======
-    "lightweight-charts": "^4.1.1",
-    "react": "^18.2.0",
->>>>>>> f33f55bda55c0864ada68e5dc8a60a36c3fbfa0a
     "react-dom": "^18.2.0",
     "react-redux": "^9.0.4",
     "react-router-dom": "^6.21.1",
