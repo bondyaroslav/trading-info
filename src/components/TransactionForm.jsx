@@ -1,15 +1,24 @@
-import React from "react";
-import constants from "../constants";
-import {useDispatch} from "react-redux";
-import {setOrdersAC} from "../store/ordersReducer";
+import React, {useState} from "react"
+import constants from "../constants"
+import {useDispatch} from "react-redux"
+import {setOrdersAC} from "../store/ordersReducer"
 import styles from "./TransactionForm.module.css"
+import Select from "../UI/select/Select";
+import Input from "../UI/input/Input";
 
 const TransactionForm = () => {
-
     const dispatch = useDispatch()
+    const [currencyPairs, setCurrencyPairs] = useState(null)
+    const [strategyType, setStrategyType] = useState(null)
+    const [transactionType, setTransactionType] = useState(null)
+    const [capitalSize, setCapitalSize] = useState(null)
+    const [creditLeveraging, setCreditLeveraging] = useState(null)
+    const [startDate, setStartDate] = useState(null)
+    const [endDate, setEndDate] = useState(null)
 
     const fetchOrdersData = () => {
-        const url = constants.url
+        const url = `${constants.url}?currencyPairs=${currencyPairs}&strategyType=${strategyType}&transactionType=${transactionType}&capitalSize=${capitalSize}&creditLeveraging=${creditLeveraging}&startDate=${startDate}&endDate=${endDate}`
+        console.log(url)
         fetch(url)
             .then( response => response.json() )
             .then( json => { if (json !== null) {
@@ -17,69 +26,41 @@ const TransactionForm = () => {
             }})
     }
 
+    const handleCurrencyPairsChange = (newValue) => {setCurrencyPairs(newValue)}
+    const handleStrategyTypeChange = (newValue) => {setStrategyType(newValue)}
+    const handleTransactionTypeChange = (newValue) => {setTransactionType(newValue)}
+    const handleCapitalSize = (newValue) => {setCapitalSize(newValue)}
+    const handleCreditLeveraging = (newValue) => {setCreditLeveraging(newValue)}
+    const handleStartDate = (newValue) => {setStartDate(newValue)}
+    const handleEndDate = (newValue) => {setEndDate(newValue)}
+
     return (
-        <form action={constants.url} style={{
+        <div style={{
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
             height: 100,
         }}>
+            <Select selectName={"currency pairs"} selectValues={constants.currencyPairs} onChange={handleCurrencyPairsChange}/>
+
             <div className={styles.parameter}>
-                <label htmlFor="currencyPair">currency pair: </label>
-                <select id="currencyPair" name="currencyPair">
-                    <option value={constants.ETHUSDT}>ETH/USDT</option>
-                    <option value={constants.BTCUSDT}>BTC/USDT</option>
-                    <option value={constants.BNBUSDT}>BNB/USDT</option>
-                </select>
+                <Select selectName={"strategy type"} selectValues={constants.strategyType} onChange={handleStrategyTypeChange}/>
+                <Select selectName={"transaction type"} selectValues={constants.transactionType} onChange={handleTransactionTypeChange}/>
             </div>
 
             <div className={styles.parameter}>
-                <div className={styles.parameter_element}>
-                    <label htmlFor="strategyType">strategy type: </label>
-                    <select id="strategyType" name="strategyType">
-                        <option value={"martingale"}>martingale</option>
-                        <option value={"anti-martingale"}>anti-martingale</option>
-                    </select>
-                </div>
-                <div className={styles.parameter_element}>
-                    <label htmlFor="transactionType">transaction type: </label>
-                    <select id="transactionType" name="transactionType">
-                        <option value={"isolated margin"}>isolated margin</option>
-                        <option value={"cross margin"}>cross margin</option>
-                        <option value={"futures"}>futures</option>
-                    </select>
-                </div>
+                <Input inputType={"text"} inputName={"capital size($)"} onChange={handleCapitalSize}/>
+                <Input inputType={"text"} inputName={"credit leveraging(x)"} onChange={handleCreditLeveraging}/>
             </div>
 
             <div className={styles.parameter}>
-                <div className={styles.parameter_element}>
-                    <label htmlFor="capitalSize">capital size($): </label>
-                    <input type="number" name="capitalSize" required/>
-                </div>
-
-                <div className={styles.parameter_element}>
-                    <label htmlFor="leverage">credit leveraging(x): </label>
-                    <input type="number"/>
-                </div>
+                <Input inputType={"date"} inputName={"start date"} onChange={handleStartDate}/>
+                <Input inputType={"date"} inputName={"end date"} onChange={handleEndDate}/>
             </div>
 
-            <div className={styles.parameter}>
-                <div className={styles.parameter_element}>
-                    <label htmlFor="startDate">start date: </label>
-                    <input type="date" name="startDate"/>
-                </div>
-
-                <div className={styles.parameter_element}>
-                    <label htmlFor="endDate">end date: </label>
-                    <input type="date" name="endDate"/>
-                </div>
-            </div>
-
-            <button onClick={() => {
-                fetchOrdersData()
-            }}>submit
+            <button onClick={fetchOrdersData}>submit
             </button>
-        </form>
+        </div>
     )
 }
 

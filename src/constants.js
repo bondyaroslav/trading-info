@@ -1,9 +1,20 @@
 const constants = {
-    ETHUSDT: "ETHUSDT",
-    BTCUSDT: "BTCUSDT",
-    BNBUSDT: "BNBUSDT",
-    url: "mockUrl/endpoint",
+    currencyPairs: [
+        "ETHUSDT",
+        "BTCUSDT",
+        "BNBUSDT"
+    ],
+    strategyType: [
+        "martingale",
+        "antiMartingale",
+    ],
+    transactionType: [
+        "isolatedMargin",
+        "crossMargin",
+        "futures",
+    ],
 
+    url: "mockUrl/endpoint",
 }
 
 export default constants

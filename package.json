@@ -9,7 +9,6 @@
     "chart.js": "^4.4.1",
     "chartjs-adapter-moment": "^1.0.1",
     "lightweight-charts": "^4.1.1",
-    "moment": "^2.30.1",
     "node-modules": "^1.0.1",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",

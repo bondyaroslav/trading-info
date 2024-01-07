@@ -26,7 +26,7 @@ const ChartComponent = () => {
                 }
 
                 myChart.current = new Chart(ctx, {
-                    type: "bar",
+                    type: "line",
                     data: {
                         labels: pricesData.map((_, i) => `${pricesData[i]} ${i + 1}`),
                         datasets: [
@@ -60,7 +60,7 @@ const ChartComponent = () => {
             if (myChart.current) {
                 myChart.current.destroy()
             }
-        };
+        }
     }, [startDate, endDate, symbol])
 
     return (

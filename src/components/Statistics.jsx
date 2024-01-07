@@ -1,14 +1,13 @@
-import React from 'react';
-<<<<<<< HEAD
-import Order from "./Order";
-import {useSelector} from "react-redux";
-import constants from "../constants";
+import React from 'react'
+import Order from "./Order"
+import {useSelector} from "react-redux"
+import constants from "../constants"
 
 const Statistics = () => {
 
-    const orders = useSelector( state => state.orders.orders)
+    const orders = useSelector(state => state.orders.orders)
 
-    const mappedOrders = orders.map( order =>
+    const mappedOrders = orders.map(order =>
         <Order
             key={order.id}
             id={order.id}
@@ -40,7 +39,7 @@ const Statistics = () => {
                     </select>
                 </div>
                 <div style={{width: 150}}>
-                <p>capital size</p>
+                    <p>capital size</p>
                     <select name="capital size" id="">
                         <option value="" selected>none</option>
                         <option value="">from bigger to smaller</option>
@@ -60,15 +59,8 @@ const Statistics = () => {
                 <p style={{width: 150}}>transaction type</p>
             </div>
             {mappedOrders}
-=======
-
-const Statistics = ({}) => {
-    return (
-        <div>
-            <h1>{}</h1>
->>>>>>> f33f55bda55c0864ada68e5dc8a60a36c3fbfa0a
         </div>
-    );
-};
+    )
+}
 
-export default Statistics;
+export default Statistics

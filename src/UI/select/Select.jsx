@@ -1,6 +1,10 @@
 import React from 'react'
 
-const Select = ({selectName, options}) => {
+const Select = ({selectName, selectValues, onChange}) => {
+    const handleSelectChange = (event) => {
+        onChange(event.target.value)
+    }
+
     return (
         <div style={{
             display: "flex",
@@ -9,13 +13,10 @@ const Select = ({selectName, options}) => {
             justifyContent: "space-between"
         }}>
             <p>{selectName}</p>
-            <select name={selectName}>
-                {
-                    options.map(option => (
-                        <option>{option}</option>
-                        )
-                    )
-                }
+            <select name={selectName} onChange={handleSelectChange}>
+                {selectValues.map(value => (
+                    <option value={value} key={value}>{value}</option>
+                ))}
             </select>
         </div>
     )

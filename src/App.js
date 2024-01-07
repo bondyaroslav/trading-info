@@ -2,7 +2,7 @@ import React from 'react'
 import "./App.css"
 import TransactionForm from "./components/TransactionForm"
 import ChartComponent from "./components/ChartComponent"
-import Statistics from "./components/Statistics";
+import Statistics from "./components/Statistics"
 
 const App = () => {
 
@@ -14,4 +14,4 @@ const App = () => {
         </div>
     )
 }
-export default App;
+export default App
