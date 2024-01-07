@@ -17,7 +17,14 @@ const TransactionForm = () => {
     const [endDate, setEndDate] = useState(null)
 
     const fetchOrdersData = () => {
-        const url = `${constants.url}?currencyPairs=${currencyPairs}&strategyType=${strategyType}&transactionType=${transactionType}&capitalSize=${capitalSize}&creditLeveraging=${creditLeveraging}&startDate=${startDate}&endDate=${endDate}`
+        const url = `${constants.url}`
+            + `&currencyPairs=${currencyPairs}`
+            + `&strategyType=${strategyType}`
+            + `&transactionType=${transactionType}`
+            + `&capitalSize=${capitalSize}`
+            + `&creditLeveraging=${creditLeveraging}`
+            + `&startDate=${startDate}`
+            + `&endDate=${endDate}`
         console.log(url)
         fetch(url)
             .then( response => response.json() )
