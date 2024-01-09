@@ -2,16 +2,25 @@ const constants = {
     currencyPairs: [
         "ETHUSDT",
         "BTCUSDT",
-        "BNBUSDT"
+        "BNBUSDT",
     ],
     strategyType: [
         "martingale",
-        "antiMartingale",
+        "anti-martingale",
     ],
     transactionType: [
-        "isolatedMargin",
-        "crossMargin",
+        "isolated margin",
+        "cross margin",
         "futures",
+    ],
+    //for sorting
+    numericalData: [
+        "from bigger to smaller",
+        "from smaller to bigger"
+    ],
+    date: [
+        "newest",
+        "oldest"
     ],
 
     url: "mockUrl/endpoint",

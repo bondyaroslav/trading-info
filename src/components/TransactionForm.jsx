@@ -8,7 +8,7 @@ import Input from "../UI/input/Input"
 
 const TransactionForm = () => {
     const dispatch = useDispatch()
-    const [currencyPairs, setCurrencyPairs] = useState("BNBUSDT")
+    const [currencyPairs, setCurrencyPairs] = useState("BTCUSDT")
     const [strategyType, setStrategyType] = useState("martingale")
     const [transactionType, setTransactionType] = useState("isolatedMargin")
     const [capitalSize, setCapitalSize] = useState("")

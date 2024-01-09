@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Select = ({selectName, selectValues, onChange}) => {
+const Select = ({selectName, value, selectValues, onChange, flexDirection}) => {
     const handleSelectChange = (event) => {
         onChange(event.target.value)
     }
@@ -8,12 +8,12 @@ const Select = ({selectName, selectValues, onChange}) => {
     return (
         <div style={{
             display: "flex",
-            flexDirection: "row",
+            flexDirection: flexDirection,
             minWidth: 150,
             justifyContent: "space-between"
         }}>
             <p>{selectName}</p>
-            <select name={selectName} onChange={handleSelectChange}>
+            <select name={selectName} defaultValue={value} onChange={handleSelectChange}>
                 {selectValues.map(value => (
                     <option value={value} key={value}>{value}</option>
                 ))}

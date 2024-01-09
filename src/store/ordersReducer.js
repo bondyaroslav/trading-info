@@ -119,4 +119,3 @@ const ordersReducer = (state = initialState, action) => {
 export const setOrdersAC = (json) => ({type: SET_ORDERS, json})
 
 export default ordersReducer
-

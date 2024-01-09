@@ -3,7 +3,7 @@ import Chart from 'chart.js/auto'
 
 const ChartComponent = () => {
     const symbol = 'BTCUSDT'
-    const endDate = new Date().getTime();
+    const endDate = new Date().getTime()
     const startDate = endDate - (30 * 24 * 60 * 60 * 1000)
 
     const chartRef = useRef(null)
@@ -31,7 +31,7 @@ const ChartComponent = () => {
                         labels: pricesData.map((_, i) => `${pricesData[i]} ${i + 1}`),
                         datasets: [
                             {
-                                label: 'Data',
+                                label: symbol,
                                 backgroundColor: 'rgba(75,192,192,1)',
                                 borderColor: 'rgba(0,0,0,1)',
                                 borderWidth: 1,
@@ -44,7 +44,7 @@ const ChartComponent = () => {
                     options: {
                         scales: {
                             y: {
-                                beginAtZero: true,
+                                beginAtZero: false,
                             },
                         },
                     },
