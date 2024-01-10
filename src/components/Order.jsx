@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from "./Order.module.css"
 
 const Order = ({
         currencyPair,
@@ -11,15 +10,27 @@ const Order = ({
         transactionType
     }) => {
 
+    const order = {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'spaceBetween',
+        alignItems: 'center',
+        height: 30,
+        width: 1050,
+    }
+    const orderArgument = {
+        width: 150
+    }
+
     return (
-        <div className={styles.order}>
-            <p className={styles.order_argument}>{currencyPair}</p>
-            <p className={styles.order_argument}>{capitalSize}</p>
-            <p className={styles.order_argument}>{creditLeverage}</p>
-            <p className={styles.order_argument}>{strategyType}</p>
-            <p className={styles.order_argument}>{transactionType}</p>
-            <p className={styles.order_argument}>{startDate}</p>
-            <p className={styles.order_argument}>{endDate}</p>
+        <div style={order}>
+            <p style={orderArgument}>{currencyPair}</p>
+            <p style={orderArgument}>{capitalSize}</p>
+            <p style={orderArgument}>{creditLeverage}</p>
+            <p style={orderArgument}>{strategyType}</p>
+            <p style={orderArgument}>{transactionType}</p>
+            <p style={orderArgument}>{startDate}</p>
+            <p style={orderArgument}>{endDate}</p>
         </div>
     )
 }

@@ -28,7 +28,7 @@ const ChartComponent = () => {
                 myChart.current = new Chart(ctx, {
                     type: "line",
                     data: {
-                        labels: pricesData.map((_, i) => `${pricesData[i]} ${i + 1}`),
+                        labels: pricesData.map((_, i) => `${i + 1}`),
                         datasets: [
                             {
                                 label: symbol,

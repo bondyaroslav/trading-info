@@ -2,7 +2,6 @@ import React, {useState} from "react"
 import constants from "../constants"
 import {useDispatch} from "react-redux"
 import {setOrdersAC} from "../store/ordersReducer"
-import styles from "./TransactionForm.module.css"
 import Select from "../UI/select/Select"
 import Input from "../UI/input/Input"
 
@@ -51,6 +50,8 @@ const TransactionForm = () => {
     const handleStartDate = (newValue) => {setStartDate(newValue)}
     const handleEndDate = (newValue) => {setEndDate(newValue)}
 
+
+
     return (
         <div style={{
             display: "flex",
@@ -60,17 +61,17 @@ const TransactionForm = () => {
         }}>
             <Select selectName={"currency pairs"} value={currencyPairs} selectValues={constants.currencyPairs} onChange={handleCurrencyPairsChange}/>
 
-            <div className={styles.parameter}>
+            <div>
                 <Select selectName={"strategy type"} value={strategyType} selectValues={constants.strategyType} onChange={handleStrategyTypeChange}/>
                 <Select selectName={"transaction type"} value={transactionType} selectValues={constants.transactionType} onChange={handleTransactionTypeChange}/>
             </div>
 
-            <div className={styles.parameter}>
+            <div>
                 <Input inputType={"text"} inputName={"capital size($)"} onChange={handleCapitalSize}/>
                 <Input inputType={"text"} inputName={"credit leveraging(x)"} onChange={handleCreditLeveraging}/>
             </div>
 
-            <div className={styles.parameter}>
+            <div>
                 <Input inputType={"date"} inputName={"start date"} onChange={handleStartDate}/>
                 <Input inputType={"date"} inputName={"end date"} onChange={handleEndDate}/>
             </div>

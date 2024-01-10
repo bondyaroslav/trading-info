@@ -22,6 +22,10 @@ const Statistics = () => {
         />
     )
 
+    const sortOrders = (sortOption) => {
+        const sortedOrders = orders.filter(  )
+    }
+
     const handleChange = () => {
         console.log("change")
     }
