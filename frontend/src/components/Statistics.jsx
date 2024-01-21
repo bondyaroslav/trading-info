@@ -7,24 +7,42 @@ import Select from "../UI/select/Select"
 const Statistics = () => {
 
     const orders = useSelector(state => state.orders.orders)
+    console.log(orders)
 
-    const mappedOrders = orders.map(order =>
-        <Order
-            key={order.id}
-            id={order.id}
-            currencyPair={order.currencyPair}
-            capitalSize={order.capitalSize}
-            creditLeverage={order.creditLeverage}
-            strategyType={order.strategyType}
-            transactionType={order.transactionType}
-            startDate={order.startDate}
-            endDate={order.endDate}
-        />
-    )
+    let sortedOrders = []
 
-    const sortOrders = (sortOption) => {
-        const sortedOrders = orders.filter(  )
+    const sortOrdersByCurrencyPairs = (currencyPair) => {
+        for (let i = 0; i < orders.length; i++) {
+            if (orders[i].currencyPair === currencyPair) {
+                sortedOrders.push(orders[i])
+            }
+        }
     }
+
+    const sortOrdersByStrategyType = (strategyType) => {
+        for (let i = 0; i < orders.length; i++) {
+            if (orders[i].strategyType === strategyType) {
+                sortedOrders.push(orders[i])
+            }
+        }
+    }
+
+    const sortOrdersByTransactionType = (transactionType) => {
+        for (let i = 0; i < orders.length; i++) {
+            if (orders[i].transactionType === transactionType) {
+                sortedOrders.push(orders[i])
+            }
+        }
+    }
+
+    function sortByCapitalSize(array) {
+        return array.sort((a, b) => a.capitalSize - b.capitalSize);
+    }
+
+
+    const sortedData = sortByCapitalSize(orders);
+    console.log(sortedData);
+
 
     const handleChange = () => {
         console.log("change")
@@ -46,7 +64,19 @@ const Statistics = () => {
                 <Select selectName={"start date"} value={"none"} selectValues={constants.date} onChange={handleChange} flexDirection={"column"}/>
                 <Select selectName={"endDate"} value={"none"} selectValues={constants.date} onChange={handleChange} flexDirection={"column"}/>
             </div>
-            {mappedOrders}
+            {orders.map(order =>
+                <Order
+                    key={order.id}
+                    id={order.id}
+                    currencyPair={order.currencyPair}
+                    capitalSize={order.capitalSize}
+                    creditLeverage={order.creditLeverage}
+                    strategyType={order.strategyType}
+                    transactionType={order.transactionType}
+                    startDate={order.startDate}
+                    endDate={order.endDate}
+                />
+            )}
         </div>
     )
 }
