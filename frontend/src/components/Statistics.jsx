@@ -5,50 +5,95 @@ import constants from "../constants"
 import Select from "../UI/select/Select"
 
 const Statistics = () => {
-
     const orders = useSelector(state => state.orders.orders)
-
-    let sortedOrders = []
+    const [sortedOrders, setSortedOrders] = useState([])
 
     const sortOrdersByCurrencyPairs = (currencyPair) => {
-        for (let i = 0; i < orders.length; i++) {
-            if (orders[i].currencyPair === currencyPair) {
-                sortedOrders.push(orders[i])
-            }
-        }
+        const filteredOrders = orders.filter( order => order.currencyPair === currencyPair )
+        setSortedOrders(filteredOrders)
     }
 
-    sortOrdersByCurrencyPairs("ETHUSDT")
-
-    const sortByCapitalSize = (sortOption) => {
+    const sortOrdersByCapitalSize = (sortOption) => {
+        const sorted = [...orders]
         if (sortOption === "from bigger to smaller") {
-            return orders.sort((a, b) => b.capitalSize - a.capitalSize)
+            sorted.sort((a, b) => b.capitalSize - a.capitalSize)
         }
         if (sortOption === "from smaller to bigger") {
-            return orders.sort((a, b) => a.capitalSize - b.capitalSize)
+            sorted.sort((a, b) => a.capitalSize - b.capitalSize)
         }
+        setSortedOrders(sorted)
     }
-    sortByCapitalSize("from smaller to bigger")
 
+    const sortOrdersByCreditLeverage = (sortOption) => {
+        const sorted = [...orders]
+        if (sortOption === "from bigger to smaller") {
+            sorted.sort((a, b) => b.creditLeverage - a.creditLeverage)
+        }
+        if (sortOption === "from smaller to bigger") {
+            sorted.sort((a, b) => a.creditLeverage - b.creditLeverage)
+        }
+        setSortedOrders(sorted)
+    }
 
     const sortOrdersByStrategyType = (strategyType) => {
-        for (let i = 0; i < orders.length; i++) {
-            if (orders[i].strategyType === strategyType) {
-                sortedOrders.push(orders[i])
-            }
-        }
+        const filteredOrders = orders.filter( order => order.strategyType === strategyType )
+        setSortedOrders(filteredOrders)
     }
 
     const sortOrdersByTransactionType = (transactionType) => {
-        for (let i = 0; i < orders.length; i++) {
-            if (orders[i].transactionType === transactionType) {
-                sortedOrders.push(orders[i])
-            }
-        }
+        const filteredOrders = orders.filter( order => order.transactionType === transactionType )
+        setSortedOrders(filteredOrders)
     }
 
-    const handleChange = () => {
-        console.log("change")
+    const sortByDate = (sortOption) => {
+        const sorted = [...orders]
+        sorted.sort((a, b) => {
+            const dateA = new Date(a.startDate).getTime()
+            const dateB = new Date(b.startDate).getTime()
+
+            if (sortOption === 'from earlier to later') {
+                return dateA - dateB
+            } else if (sortOption === 'from later to earlier') {
+                return dateB - dateA
+            }
+            return 0
+        })
+        setSortedOrders(sorted)
+    }
+
+    const handleChange = (selectName, selectedValue) => {
+        switch (selectName) {
+            case "currency pairs":
+                sortOrdersByCurrencyPairs(selectedValue)
+                break
+
+            case "capital size":
+                sortOrdersByCapitalSize(selectedValue)
+                break
+
+            case "credit leverage":
+                sortOrdersByCreditLeverage(selectedValue)
+                break
+
+            case "strategy type":
+                sortOrdersByStrategyType(selectedValue)
+                break
+
+            case "transaction type":
+                sortOrdersByTransactionType(selectedValue)
+                break
+
+            case 'start date':
+                sortByDate(selectedValue)
+                break
+
+            case 'end date':
+                sortByDate(selectedValue)
+                break
+
+            default:
+                return orders
+        }
     }
 
     return (
@@ -59,13 +104,46 @@ const Statistics = () => {
                 width: "100%",
                 marginTop: 20
             }}>
-                <Select selectName={"currency pairs"} value={"none"} selectValues={constants.currencyPairs} onChange={sortOrdersByCurrencyPairs} flexDirection={"column"}/>
-                <Select selectName={"capital size"} value={"none"} selectValues={constants.numericalData} onChange={handleChange} flexDirection={"column"}/>
-                <Select selectName={"credit leverage"} value={"none"} selectValues={constants.numericalData} onChange={handleChange} flexDirection={"column"}/>
-                <Select selectName={"strategyType"} value={"none"} selectValues={constants.strategyType} onChange={handleChange} flexDirection={"column"}/>
-                <Select selectName={"transactionType"} value={"none"} selectValues={constants.transactionType} onChange={handleChange} flexDirection={"column"}/>
-                <Select selectName={"start date"} value={"none"} selectValues={constants.date} onChange={handleChange} flexDirection={"column"}/>
-                <Select selectName={"endDate"} value={"none"} selectValues={constants.date} onChange={handleChange} flexDirection={"column"}/>
+                <Select selectName={"currency pairs"}
+                        value={"none"} selectValues={constants.currencyPairs}
+                        onChange={ (value) => {handleChange("currency pairs", value)} }
+                        flexDirection={"column"}/>
+
+                <Select selectName={"capital size"}
+                        value={"none"}
+                        selectValues={constants.numericalData}
+                        onChange={ (value) => {handleChange("capital size", value)} }
+                        flexDirection={"column"}/>
+
+                <Select selectName={"credit leverage"}
+                        value={"none"}
+                        selectValues={constants.numericalData}
+                        onChange={ (value) => {handleChange("credit leverage", value)} }
+                        flexDirection={"column"}/>
+
+                <Select selectName={"strategy type"}
+                        value={"none"}
+                        selectValues={constants.strategyType}
+                        onChange={ (value) => {handleChange("strategy type", value)} }
+                        flexDirection={"column"}/>
+
+                <Select selectName={"transaction type"}
+                        value={"none"}
+                        selectValues={constants.transactionType}
+                        onChange={ (value) => {handleChange("transaction type", value)} }
+                        flexDirection={"column"}/>
+
+                <Select selectName={"start date"}
+                        value={"none"}
+                        selectValues={constants.date}
+                        onChange={ (value) => {handleChange("start date", value)} }
+                        flexDirection={"column"}/>
+
+                <Select selectName={"endDate"}
+                        value={"none"}
+                        selectValues={constants.date}
+                        onChange={ (value) => {handleChange("end date", value)} }
+                        flexDirection={"column"}/>
             </div>
             {
                 sortedOrders.length !== 0

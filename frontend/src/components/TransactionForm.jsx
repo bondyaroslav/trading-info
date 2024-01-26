@@ -50,8 +50,6 @@ const TransactionForm = () => {
     const handleStartDate = (newValue) => {setStartDate(newValue)}
     const handleEndDate = (newValue) => {setEndDate(newValue)}
 
-
-
     return (
         <div style={{
             display: "flex",

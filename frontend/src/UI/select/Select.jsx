@@ -14,8 +14,8 @@ const Select = ({selectName, value, selectValues, onChange, flexDirection}) => {
         }}>
             <p>{selectName}</p>
             <select name={selectName} defaultValue={value} onChange={handleSelectChange}>
-                {selectValues.map(value => (
-                    <option value={value} key={value}>{value}</option>
+                {selectValues.map(optionValue => (
+                    <option value={optionValue} key={optionValue}>{optionValue}</option>
                 ))}
             </select>
         </div>

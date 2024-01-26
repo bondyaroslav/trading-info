@@ -19,8 +19,8 @@ const constants = {
         "from smaller to bigger"
     ],
     date: [
-        "newest",
-        "oldest"
+        "from earlier to later",
+        "from later to earlier"
     ],
 
     url: "mockUrl/endpoint",
