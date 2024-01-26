@@ -3,18 +3,21 @@ import Order from "./Order"
 import {useSelector} from "react-redux"
 import constants from "../constants"
 import Select from "../UI/select/Select"
+import NotFoundOrders from "./NotFoundOrders";
 
 const Statistics = () => {
     const orders = useSelector(state => state.orders.orders)
-    const [sortedOrders, setSortedOrders] = useState([])
+    const [sortedOrders, setSortedOrders] = useState(orders)
+
+    const setOrders = () => { setSortedOrders(orders) }
 
     const sortOrdersByCurrencyPairs = (currencyPair) => {
-        const filteredOrders = orders.filter( order => order.currencyPair === currencyPair )
+        const filteredOrders = sortedOrders.filter( order => order.currencyPair === currencyPair )
         setSortedOrders(filteredOrders)
     }
 
     const sortOrdersByCapitalSize = (sortOption) => {
-        const sorted = [...orders]
+        const sorted = [...sortedOrders]
         if (sortOption === "from bigger to smaller") {
             sorted.sort((a, b) => b.capitalSize - a.capitalSize)
         }
@@ -25,7 +28,7 @@ const Statistics = () => {
     }
 
     const sortOrdersByCreditLeverage = (sortOption) => {
-        const sorted = [...orders]
+        const sorted = [...sortedOrders]
         if (sortOption === "from bigger to smaller") {
             sorted.sort((a, b) => b.creditLeverage - a.creditLeverage)
         }
@@ -36,17 +39,17 @@ const Statistics = () => {
     }
 
     const sortOrdersByStrategyType = (strategyType) => {
-        const filteredOrders = orders.filter( order => order.strategyType === strategyType )
+        const filteredOrders = sortedOrders.filter( order => order.strategyType === strategyType )
         setSortedOrders(filteredOrders)
     }
 
     const sortOrdersByTransactionType = (transactionType) => {
-        const filteredOrders = orders.filter( order => order.transactionType === transactionType )
+        const filteredOrders = sortedOrders.filter( order => order.transactionType === transactionType )
         setSortedOrders(filteredOrders)
     }
 
     const sortByDate = (sortOption) => {
-        const sorted = [...orders]
+        const sorted = [...sortedOrders]
         sorted.sort((a, b) => {
             const dateA = new Date(a.startDate).getTime()
             const dateB = new Date(b.startDate).getTime()
@@ -94,6 +97,7 @@ const Statistics = () => {
             default:
                 return orders
         }
+        console.log(sortedOrders)
     }
 
     return (
@@ -162,20 +166,8 @@ const Statistics = () => {
                         />
                     )
                     :
-                    orders.map(order =>
-                        <Order
-                            key={order.id}
-                            id={order.id}
-                            currencyPair={order.currencyPair}
-                            capitalSize={order.capitalSize}
-                            creditLeverage={order.creditLeverage}
-                            strategyType={order.strategyType}
-                            transactionType={order.transactionType}
-                            startDate={order.startDate}
-                            endDate={order.endDate}
-                        />
-                    )
-                }
+                    <NotFoundOrders setOrders={ setOrders }/>
+            }
         </div>
     )
 }
