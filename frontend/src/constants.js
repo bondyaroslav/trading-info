@@ -9,8 +9,8 @@ const constants = {
         "anti-martingale",
     ],
     transactionType: [
-        "isolated margin",
-        "cross margin",
+        "isolated-margin",
+        "cross-margin",
         "futures",
     ],
     //for sorting

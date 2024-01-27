@@ -86,11 +86,11 @@ const Statistics = () => {
                 sortOrdersByTransactionType(selectedValue)
                 break
 
-            case 'start date':
+            case "start date":
                 sortByDate(selectedValue)
                 break
 
-            case 'end date':
+            case "end date":
                 sortByDate(selectedValue)
                 break
 

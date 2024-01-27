@@ -103,7 +103,8 @@ const data = [
     { id: 97, currencyPair: 'ETHUSDT', capitalSize: 1750, creditLeverage: 9, startDate: "18-11-2023", endDate: "19-11-2023", strategyType: 'martingale', transactionType: 'cross-margin' },
     { id: 98, currencyPair: 'ETHUSDT', capitalSize: 2150, creditLeverage: 7, startDate: "20-11-2023", endDate: "21-11-2023", strategyType: 'anti-martingale', transactionType: 'isolated-margin' },
     { id: 99, currencyPair: 'BTCUSDT', capitalSize: 1350, creditLeverage: 6, startDate: "22-11-2023", endDate: "23-11-2023", strategyType: 'martingale', transactionType: 'futures' },
-    { id: 100, currencyPair: 'ETHUSDT', capitalSize: 1700, creditLeverage: 10, startDate: "24-11-2023", endDate: "25-11-2023", strategyType: 'anti-martingale', transactionType: 'cross-margin' }
+    { id: 100, currencyPair: 'ETHUSDT', capitalSize: 1700, creditLeverage: 10, startDate: "24-11-2023", endDate: "25-11-2023", strategyType: 'anti-martingale', transactionType: 'cross-margin' },
+    { id: 101, currencyPair: 'BTCUSDT', capitalSize: 1000, creditLeverage: 10, startDate: "10-5-2023", endDate: "11-5-2023", strategyType: 'martingale', transactionType: 'futures' }
 ]
 
 app.use((req, res, next) => {

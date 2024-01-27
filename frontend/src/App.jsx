@@ -6,10 +6,6 @@ import Statistics from "./components/Statistics/Statistics"
 
 const App = () => {
 
-    // fetch("http://localhost:5000/api/data")
-    //     .then( response =>  response.json() )
-    //     .then( json => console.log(json) )
-
     return (
         <div className="App">
             <TransactionForm/>

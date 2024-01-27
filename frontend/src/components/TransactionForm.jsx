@@ -7,9 +7,9 @@ import Input from "../UI/input/Input"
 
 const TransactionForm = () => {
     const dispatch = useDispatch()
-    const [currencyPairs, setCurrencyPairs] = useState("BTCUSDT")
-    const [strategyType, setStrategyType] = useState("martingale")
-    const [transactionType, setTransactionType] = useState("isolatedMargin")
+    const [currencyPairs, setCurrencyPairs] = useState("")
+    const [strategyType, setStrategyType] = useState("")
+    const [transactionType, setTransactionType] = useState("")
     const [capitalSize, setCapitalSize] = useState("")
     const [creditLeverage, setCreditLeverage] = useState("")
     const [startDate, setStartDate] = useState("")
@@ -43,11 +43,10 @@ const TransactionForm = () => {
                 fetch(url)
                     .then(response => response.json())
                     .then(json => {
-                        // if (json.length !== 0) {
-                        //     // dispatch(setOrdersAC(json));
-                        //
-                        // }
-                        console.log(json)
+                        if (json.length !== 0) {
+                            // dispatch(setOrdersAC(json))
+                            console.log(json)
+                        } else console.log("Orders not found")
                     })
                     .catch(error => console.error("Error fetching data:", error))
             } else {
