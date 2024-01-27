@@ -11,7 +11,7 @@ const TransactionForm = () => {
     const [strategyType, setStrategyType] = useState("martingale")
     const [transactionType, setTransactionType] = useState("isolatedMargin")
     const [capitalSize, setCapitalSize] = useState("")
-    const [creditLeveraging, setCreditLeveraging] = useState("")
+    const [creditLeverage, setCreditLeverage] = useState("")
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("")
 
@@ -22,7 +22,7 @@ const TransactionForm = () => {
             strategyType !== "" &&
             transactionType !== "" &&
             isNumerical(capitalSize) &&
-            isNumerical(creditLeveraging) &&
+            isNumerical(creditLeverage) &&
             startDate !== "" &&
             endDate !== ""
         ) {
@@ -31,22 +31,23 @@ const TransactionForm = () => {
 
             // Validate start date is not later than end date
             if (startDateTimestamp <= endDateTimestamp) {
-                const url = `${constants.url}`
-                    + `&currencyPairs=${currencyPairs}`
+                const url = `http://localhost:5000/api/data`
+                    + `?currencyPairs=${currencyPairs}`
                     + `&strategyType=${strategyType}`
                     + `&transactionType=${transactionType}`
                     + `&capitalSize=${capitalSize}`
-                    + `&creditLeveraging=${creditLeveraging}`
+                    + `&creditLeveraging=${creditLeverage}`
                     + `&startDate=${startDate}`
                     + `&endDate=${endDate}`
                 console.log(url)
-
                 fetch(url)
                     .then(response => response.json())
                     .then(json => {
-                        if (json !== null) {
-                            dispatch(setOrdersAC(json));
-                        }
+                        // if (json.length !== 0) {
+                        //     // dispatch(setOrdersAC(json));
+                        //
+                        // }
+                        console.log(json)
                     })
                     .catch(error => console.error("Error fetching data:", error))
             } else {
@@ -61,7 +62,7 @@ const TransactionForm = () => {
     const handleStrategyTypeChange = (newValue) => {setStrategyType(newValue)}
     const handleTransactionTypeChange = (newValue) => {setTransactionType(newValue)}
     const handleCapitalSize = (newValue) => {setCapitalSize(newValue)}
-    const handleCreditLeveraging = (newValue) => {setCreditLeveraging(newValue)}
+    const handleCreditLeveraging = (newValue) => {setCreditLeverage(newValue)}
     const handleStartDate = (newValue) => {setStartDate(newValue)}
     const handleEndDate = (newValue) => {setEndDate(newValue)}
 
