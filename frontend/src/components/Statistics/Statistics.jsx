@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import Order from "./Order"
 import {useSelector} from "react-redux"
-import constants from "../constants"
-import Select from "../UI/select/Select"
-import NotFoundOrders from "./NotFoundOrders";
+import constants from "../../constants"
+import Select from "../../UI/select/Select"
+import NotFoundOrders from "./NotFoundOrders"
 
 const Statistics = () => {
     const orders = useSelector(state => state.orders.orders)
@@ -109,7 +109,8 @@ const Statistics = () => {
                 marginTop: 20
             }}>
                 <Select selectName={"currency pairs"}
-                        value={"none"} selectValues={constants.currencyPairs}
+                        value={"none"}
+                        selectValues={constants.currencyPairs}
                         onChange={ (value) => {handleChange("currency pairs", value)} }
                         flexDirection={"column"}/>
 

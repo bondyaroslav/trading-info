@@ -16,30 +16,45 @@ const TransactionForm = () => {
     const [endDate, setEndDate] = useState("")
 
     const fetchOrdersData = () => {
+        const isNumerical = (value) => !isNaN(parseFloat(value)) && isFinite(value)
         if (
             currencyPairs !== "" &&
             strategyType !== "" &&
             transactionType !== "" &&
-            capitalSize !== "" &&
-            creditLeveraging !== "" &&
+            isNumerical(capitalSize) &&
+            isNumerical(creditLeveraging) &&
             startDate !== "" &&
             endDate !== ""
         ) {
-            const url = `${constants.url}`
-                + `&currencyPairs=${currencyPairs}`
-                + `&strategyType=${strategyType}`
-                + `&transactionType=${transactionType}`
-                + `&capitalSize=${capitalSize}`
-                + `&creditLeveraging=${creditLeveraging}`
-                + `&startDate=${startDate}`
-                + `&endDate=${endDate}`
-            console.log(url)
-            fetch(url)
-                .then( response => response.json() )
-                .then( json => { if (json !== null) {
-                    dispatch(setOrdersAC(json))
-                }})
-        } else console.log("error")
+            const startDateTimestamp = new Date(startDate).getTime()
+            const endDateTimestamp = new Date(endDate).getTime()
+
+            // Validate start date is not later than end date
+            if (startDateTimestamp <= endDateTimestamp) {
+                const url = `${constants.url}`
+                    + `&currencyPairs=${currencyPairs}`
+                    + `&strategyType=${strategyType}`
+                    + `&transactionType=${transactionType}`
+                    + `&capitalSize=${capitalSize}`
+                    + `&creditLeveraging=${creditLeveraging}`
+                    + `&startDate=${startDate}`
+                    + `&endDate=${endDate}`
+                console.log(url)
+
+                fetch(url)
+                    .then(response => response.json())
+                    .then(json => {
+                        if (json !== null) {
+                            dispatch(setOrdersAC(json));
+                        }
+                    })
+                    .catch(error => console.error("Error fetching data:", error))
+            } else {
+                console.log("Start date cannot be later than end date")
+            }
+        } else {
+            console.log("Validation error: Some parameters are missing or not valid")
+        }
     }
 
     const handleCurrencyPairsChange = (newValue) => {setCurrencyPairs(newValue)}
