@@ -56,7 +56,7 @@ const LinearChart = () => {
             } catch (error) {
                 console.error('Error:', error)
             }
-        };
+        }
 
         fetchData()
 

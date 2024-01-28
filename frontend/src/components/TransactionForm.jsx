@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from "react"
+import React, {useState} from "react"
 import constants from "../constants"
 import {useDispatch} from "react-redux"
 import Select from "../UI/select/Select"
 import Input from "../UI/input/Input"
+import {setAllOrdersAC, setMatchingOrders} from "../store/ordersReducer"
 
 const TransactionForm = () => {
     const dispatch = useDispatch()
@@ -14,7 +15,7 @@ const TransactionForm = () => {
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("")
 
-    const fetchOrdersData = () => {
+    const findMatchingOrders = () => {
         const isNumerical = (value) => !isNaN(parseFloat(value)) && isFinite(value)
         if (
             currencyPairs !== "" &&
@@ -43,7 +44,7 @@ const TransactionForm = () => {
                     .then(response => response.json())
                     .then(json => {
                         if (json.length !== 0) {
-                            // dispatch(setOrdersAC(json))
+                            dispatch(setMatchingOrders(json))
                             console.log(json)
                         } else console.log("Orders not found")
                     })
@@ -60,7 +61,7 @@ const TransactionForm = () => {
         const url = `http://localhost:5000/api/data`
         fetch(url)
             .then(response => response.json())
-            .then( json => console.log(json) )
+            .then( json => dispatch(setAllOrdersAC(json)) )
     }
     
     const handleCurrencyPairsChange = (newValue) => {setCurrencyPairs(newValue)}
@@ -99,7 +100,7 @@ const TransactionForm = () => {
                 display: "flex",
                 flexDirection: "column"
             }}>
-                <button onClick={fetchOrdersData}>submit</button>
+                <button onClick={findMatchingOrders}>submit</button>
                 <button onClick={getAllOrders}>get all orders</button>
             </div>
         </div>

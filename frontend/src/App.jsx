@@ -1,7 +1,7 @@
 import React from 'react'
 import "./App.css"
 import TransactionForm from "./components/TransactionForm"
-import ChartComponent from "./components/ChartComponent"
+import LinearChart from "./components/LinearChart"
 import Statistics from "./components/Statistics/Statistics"
 
 const App = () => {
@@ -9,7 +9,7 @@ const App = () => {
     return (
         <div className="App">
             <TransactionForm/>
-            <ChartComponent/>
+            <LinearChart/>
             <Statistics/>
         </div>
     )

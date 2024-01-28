@@ -1,12 +1,11 @@
 import React, {useState} from 'react'
 import Order from "./Order"
 import {useSelector} from "react-redux"
-import constants from "../../constants"
-import Select from "../../UI/select/Select"
 import NotFoundOrders from "./NotFoundOrders"
+import SortingMenu from "./SortingMenu"
 
 const Statistics = () => {
-    const orders = useSelector(state => state.orders.orders)
+    const orders = useSelector(state => state.orders.allOrders)
     const [sortedOrders, setSortedOrders] = useState(orders)
 
     const setOrders = () => { setSortedOrders(orders) }
@@ -54,9 +53,9 @@ const Statistics = () => {
             const dateA = new Date(a.startDate).getTime()
             const dateB = new Date(b.startDate).getTime()
 
-            if (sortOption === 'from earlier to later') {
+            if (sortOption === "from earlier to later") {
                 return dateA - dateB
-            } else if (sortOption === 'from later to earlier') {
+            } else if (sortOption === "from later to earlier") {
                 return dateB - dateA
             }
             return 0
@@ -94,6 +93,10 @@ const Statistics = () => {
                 sortByDate(selectedValue)
                 break
 
+            case "none":
+                return 0
+                break
+
             default:
                 return orders
         }
@@ -102,54 +105,7 @@ const Statistics = () => {
 
     return (
         <div>
-            <div style={{
-                display: "flex",
-                flexDirection: "row",
-                width: "100%",
-                marginTop: 20
-            }}>
-                <Select selectName={"currency pairs"}
-                        value={"none"}
-                        selectValues={constants.currencyPairs}
-                        onChange={ (value) => {handleChange("currency pairs", value)} }
-                        flexDirection={"column"}/>
-
-                <Select selectName={"capital size"}
-                        value={"none"}
-                        selectValues={constants.numericalData}
-                        onChange={ (value) => {handleChange("capital size", value)} }
-                        flexDirection={"column"}/>
-
-                <Select selectName={"credit leverage"}
-                        value={"none"}
-                        selectValues={constants.numericalData}
-                        onChange={ (value) => {handleChange("credit leverage", value)} }
-                        flexDirection={"column"}/>
-
-                <Select selectName={"strategy type"}
-                        value={"none"}
-                        selectValues={constants.strategyType}
-                        onChange={ (value) => {handleChange("strategy type", value)} }
-                        flexDirection={"column"}/>
-
-                <Select selectName={"transaction type"}
-                        value={"none"}
-                        selectValues={constants.transactionType}
-                        onChange={ (value) => {handleChange("transaction type", value)} }
-                        flexDirection={"column"}/>
-
-                <Select selectName={"start date"}
-                        value={"none"}
-                        selectValues={constants.date}
-                        onChange={ (value) => {handleChange("start date", value)} }
-                        flexDirection={"column"}/>
-
-                <Select selectName={"endDate"}
-                        value={"none"}
-                        selectValues={constants.date}
-                        onChange={ (value) => {handleChange("end date", value)} }
-                        flexDirection={"column"}/>
-            </div>
+            <SortingMenu handleChange={handleChange}/>
             {
                 sortedOrders.length !== 0
                     ?
@@ -167,7 +123,7 @@ const Statistics = () => {
                         />
                     )
                     :
-                    <NotFoundOrders setOrders={ setOrders }/>
+                    <NotFoundOrders setOrders={setOrders}/>
             }
         </div>
     )
