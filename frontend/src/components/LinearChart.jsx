@@ -1,29 +1,29 @@
-import React, { useEffect, useRef } from 'react';
-import Chart from 'chart.js/auto';
+import React, { useEffect, useRef } from 'react'
+import Chart from 'chart.js/auto'
 
-const ChartComponent = () => {
-    const symbol = 'BTCUSDT';
-    const endDate = new Date().getTime();
-    const startDate = endDate - 30 * 24 * 60 * 60 * 1000;
+const LinearChart = () => {
+    const symbol = 'BTCUSDT'
+    const endDate = new Date().getTime()
+    const startDate = endDate - 30 * 24 * 60 * 60 * 1000
 
-    const chartRef = useRef(null);
-    const myChart = useRef(null);
+    const chartRef = useRef(null)
+    const myChart = useRef(null)
 
     useEffect(() => {
         const fetchData = async () => {
-            const url = `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1d&startTime=${startDate}&endTime=${endDate}`;
+            const url = `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1d&startTime=${startDate}&endTime=${endDate}`
 
             try {
-                const response = await fetch(url);
-                const data = await response.json();
+                const response = await fetch(url)
+                const data = await response.json()
 
-                const pricesData = data.map((item) => item[1]);
-                const datesData = data.map((item) => new Date(item[0]));
+                const pricesData = data.map((item) => item[1])
+                const datesData = data.map((item) => new Date(item[0]))
 
-                const ctx = chartRef.current;
+                const ctx = chartRef.current
 
                 if (myChart.current) {
-                    myChart.current.destroy();
+                    myChart.current.destroy()
                 }
 
                 myChart.current = new Chart(ctx, {
@@ -31,7 +31,7 @@ const ChartComponent = () => {
                     data: {
                         labels: datesData.map(
                             (date) =>
-                                `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+                                `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
                         ),
                         datasets: [
                             {
@@ -52,27 +52,27 @@ const ChartComponent = () => {
                             },
                         },
                     },
-                });
+                })
             } catch (error) {
-                console.error('Error:', error);
+                console.error('Error:', error)
             }
         };
 
-        fetchData();
+        fetchData()
 
         return () => {
             if (myChart.current) {
-                myChart.current.destroy();
+                myChart.current.destroy()
             }
-        };
-    }, [startDate, endDate, symbol]);
+        }
+    }, [startDate, endDate, symbol])
 
     return (
         <div style={{ width: 700 }}>
             <h2>Chart</h2>
             <canvas ref={chartRef} />
         </div>
-    );
-};
+    )
+}
 
-export default ChartComponent;
+export default LinearChart
