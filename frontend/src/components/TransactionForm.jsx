@@ -1,7 +1,6 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import constants from "../constants"
 import {useDispatch} from "react-redux"
-import {setOrdersAC} from "../store/ordersReducer"
 import Select from "../UI/select/Select"
 import Input from "../UI/input/Input"
 
@@ -57,6 +56,13 @@ const TransactionForm = () => {
         }
     }
 
+    const getAllOrders = () => {
+        const url = `http://localhost:5000/api/data`
+        fetch(url)
+            .then(response => response.json())
+            .then( json => console.log(json) )
+    }
+    
     const handleCurrencyPairsChange = (newValue) => {setCurrencyPairs(newValue)}
     const handleStrategyTypeChange = (newValue) => {setStrategyType(newValue)}
     const handleTransactionTypeChange = (newValue) => {setTransactionType(newValue)}
@@ -89,7 +95,13 @@ const TransactionForm = () => {
                 <Input inputType={"date"} inputName={"end date"} onChange={handleEndDate}/>
             </div>
 
-            <button onClick={fetchOrdersData}>submit</button>
+            <div style={{
+                display: "flex",
+                flexDirection: "column"
+            }}>
+                <button onClick={fetchOrdersData}>submit</button>
+                <button onClick={getAllOrders}>get all orders</button>
+            </div>
         </div>
     )
 }
