@@ -11,12 +11,12 @@ const Statistics = () => {
     const setOrders = () => { setSortedOrders(orders) }
 
     const sortOrdersByCurrencyPairs = (currencyPair) => {
-        const filteredOrders = sortedOrders.filter( order => order.currencyPair === currencyPair )
+        const filteredOrders = orders.filter( order => order.currencyPair === currencyPair )
         setSortedOrders(filteredOrders)
     }
 
     const sortOrdersByCapitalSize = (sortOption) => {
-        const sorted = [...sortedOrders]
+        const sorted = [...orders]
         if (sortOption === "from bigger to smaller") {
             sorted.sort((a, b) => b.capitalSize - a.capitalSize)
         }
@@ -27,7 +27,7 @@ const Statistics = () => {
     }
 
     const sortOrdersByCreditLeverage = (sortOption) => {
-        const sorted = [...sortedOrders]
+        const sorted = [...orders]
         if (sortOption === "from bigger to smaller") {
             sorted.sort((a, b) => b.creditLeverage - a.creditLeverage)
         }
@@ -38,17 +38,17 @@ const Statistics = () => {
     }
 
     const sortOrdersByStrategyType = (strategyType) => {
-        const filteredOrders = sortedOrders.filter( order => order.strategyType === strategyType )
+        const filteredOrders = orders.filter( order => order.strategyType === strategyType )
         setSortedOrders(filteredOrders)
     }
 
     const sortOrdersByTransactionType = (transactionType) => {
-        const filteredOrders = sortedOrders.filter( order => order.transactionType === transactionType )
+        const filteredOrders = orders.filter( order => order.transactionType === transactionType )
         setSortedOrders(filteredOrders)
     }
 
     const sortByDate = (sortOption) => {
-        const sorted = [...sortedOrders]
+        const sorted = [...orders]
         sorted.sort((a, b) => {
             const dateA = new Date(a.startDate).getTime()
             const dateB = new Date(b.startDate).getTime()
@@ -94,7 +94,6 @@ const Statistics = () => {
                 break
 
             case "none":
-                return 0
                 break
 
             default:
