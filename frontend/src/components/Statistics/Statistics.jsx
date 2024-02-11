@@ -3,10 +3,20 @@ import Order from "./Order"
 import {useSelector} from "react-redux"
 import NotFoundOrders from "./NotFoundOrders"
 import SortingMenu from "./SortingMenu"
+import {Pagination, PaginationItem, Box} from "@mui/material"
 
 const Statistics = () => {
     const orders = useSelector(state => state.orders.allOrders)
     const [sortedOrders, setSortedOrders] = useState(orders)
+
+    const pageSize = 15
+    const [currentPage, setCurrentPage] = useState(1)
+
+    const paginate = (array, pageSize, currentPage) => {
+        return array.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+    }
+
+    const paginatedOrders = paginate(sortedOrders, pageSize, currentPage)
 
     const setOrders = () => { setSortedOrders(orders) }
 
@@ -68,38 +78,34 @@ const Statistics = () => {
             case "currency pairs":
                 sortOrdersByCurrencyPairs(selectedValue)
                 break
-
             case "capital size":
                 sortOrdersByCapitalSize(selectedValue)
                 break
-
             case "credit leverage":
                 sortOrdersByCreditLeverage(selectedValue)
                 break
-
             case "strategy type":
                 sortOrdersByStrategyType(selectedValue)
                 break
-
             case "transaction type":
                 sortOrdersByTransactionType(selectedValue)
                 break
-
             case "start date":
                 sortByDate(selectedValue)
                 break
-
             case "end date":
                 sortByDate(selectedValue)
                 break
-
             case "none":
                 break
-
             default:
                 return orders
         }
         console.log(sortedOrders)
+    }
+
+    const onChangePage = (event, page) => {
+        setCurrentPage(page)
     }
 
     return (
@@ -108,19 +114,32 @@ const Statistics = () => {
             {
                 sortedOrders.length !== 0
                     ?
-                    sortedOrders.map(order =>
-                        <Order
-                            key={order.id}
-                            id={order.id}
-                            currencyPair={order.currencyPair}
-                            capitalSize={order.capitalSize}
-                            creditLeverage={order.creditLeverage}
-                            strategyType={order.strategyType}
-                            transactionType={order.transactionType}
-                            startDate={order.startDate}
-                            endDate={order.endDate}
+                    <Box>
+                        {paginatedOrders.map(order =>
+                            <Order
+                                key={order.id}
+                                id={order.id}
+                                currencyPair={order.currencyPair}
+                                capitalSize={order.capitalSize}
+                                creditLeverage={order.creditLeverage}
+                                strategyType={order.strategyType}
+                                transactionType={order.transactionType}
+                                startDate={order.startDate}
+                                endDate={order.endDate}
+                            />
+                        )}
+                        <Pagination
+                            count={Math.ceil(orders.length / pageSize)}
+                            page={currentPage}
+                            onChange={onChangePage}
+                            renderItem={(item) => (
+                                <PaginationItem
+                                    component="div"
+                                    {...item}
+                                />
+                            )}
                         />
-                    )
+                    </Box>
                     :
                     <NotFoundOrders setOrders={setOrders}/>
             }

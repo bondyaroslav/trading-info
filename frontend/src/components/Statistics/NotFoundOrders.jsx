@@ -9,7 +9,7 @@ const NotFoundOrders = ({setOrders}) => {
             marginTop: 30
         }}>
             <p>Orders not found</p>
-            <button onClick={ () => setOrders() }>show all orders</button>
+            <button onClick={setOrders}>show all orders</button>
         </div>
     )
 }
