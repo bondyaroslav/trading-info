@@ -109,7 +109,7 @@ const Statistics = () => {
     }
 
     return (
-        <div>
+        <Box>
             <SortingMenu handleChange={handleChange}/>
             {
                 sortedOrders.length !== 0
@@ -143,7 +143,7 @@ const Statistics = () => {
                     :
                     <NotFoundOrders setOrders={setOrders}/>
             }
-        </div>
+        </Box>
     )
 }
 

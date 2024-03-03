@@ -2,9 +2,9 @@ import React, { useEffect, useRef } from 'react'
 import Chart from 'chart.js/auto'
 
 const LinearChart = () => {
-    const symbol = 'BTCUSDT'
+    const symbol = 'XRPUSDT'
     const endDate = new Date().getTime()
-    const startDate = endDate - 30 * 24 * 60 * 60 * 1000
+    const startDate = endDate - 90 * 24 * 60 * 60 * 1000
 
     const chartRef = useRef(null)
     const myChart = useRef(null)

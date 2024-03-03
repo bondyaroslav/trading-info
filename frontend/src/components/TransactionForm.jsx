@@ -4,6 +4,7 @@ import {useDispatch} from "react-redux"
 import Select from "../UI/select/Select"
 import Input from "../UI/input/Input"
 import {setAllOrdersAC, setMatchingOrders} from "../store/ordersReducer"
+import {Box, Button, Paper} from "@mui/material"
 
 const TransactionForm = () => {
     const dispatch = useDispatch()
@@ -73,37 +74,53 @@ const TransactionForm = () => {
     const handleEndDate = (newValue) => {setEndDate(newValue)}
 
     return (
-        <div style={{
+        <Box style={{
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
+            // width: 1000,
             height: 100,
         }}>
-            <Select selectName={"currency pairs"} value={currencyPairs} selectValues={constants.currencyPairs} onChange={handleCurrencyPairsChange}/>
+            <Select
+                label={"currency pairs"}
+                value={currencyPairs}
+                selectValues={constants.currencyPairs}
+                onChange={handleCurrencyPairsChange}
+            />
 
-            <div>
-                <Select selectName={"strategy type"} value={strategyType} selectValues={constants.strategyType} onChange={handleStrategyTypeChange}/>
-                <Select selectName={"transaction type"} value={transactionType} selectValues={constants.transactionType} onChange={handleTransactionTypeChange}/>
-            </div>
+            <Box>
+                <Select
+                    selectName={"strategy type"}
+                    value={strategyType}
+                    selectValues={constants.strategyType}
+                    onChange={handleStrategyTypeChange}
+                />
+                <Select
+                    selectName={"transaction type"}
+                    value={transactionType}
+                    selectValues={constants.transactionType}
+                    onChange={handleTransactionTypeChange}
+                />
+            </Box>
 
-            <div>
+            <Box>
                 <Input inputType={"text"} inputName={"capital size($)"} onChange={handleCapitalSize}/>
                 <Input inputType={"text"} inputName={"credit leveraging(x)"} onChange={handleCreditLeveraging}/>
-            </div>
+            </Box>
 
-            <div>
+            <Box>
                 <Input inputType={"date"} inputName={"start date"} onChange={handleStartDate}/>
                 <Input inputType={"date"} inputName={"end date"} onChange={handleEndDate}/>
-            </div>
+            </Box>
 
-            <div style={{
+            <Box style={{
                 display: "flex",
                 flexDirection: "column"
             }}>
-                <button onClick={findMatchingOrders}>submit</button>
-                <button onClick={getAllOrders}>get all orders</button>
-            </div>
-        </div>
+                <Button onClick={findMatchingOrders}>submit</Button>
+                <Button onClick={getAllOrders}>get all orders</Button>
+            </Box>
+        </Box>
     )
 }
 
