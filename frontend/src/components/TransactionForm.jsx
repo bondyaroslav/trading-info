@@ -3,7 +3,7 @@ import constants from "../constants"
 import {useDispatch} from "react-redux"
 import Select from "../UI/select/Select"
 import Input from "../UI/input/Input"
-import {setAllOrdersAC, setMatchingOrders} from "../store/ordersReducer"
+import {setAllOrdersAC, setMatchingOrders} from "../redux/ordersReducer"
 import {Box, Button, Paper} from "@mui/material"
 
 const TransactionForm = () => {
@@ -78,7 +78,6 @@ const TransactionForm = () => {
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
-            // width: 1000,
             height: 100,
         }}>
             <Select

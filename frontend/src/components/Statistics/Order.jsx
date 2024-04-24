@@ -1,4 +1,5 @@
 import React from 'react'
+import {Box} from "@mui/material";
 
 const Order = ({
         currencyPair,
@@ -23,7 +24,7 @@ const Order = ({
     }
 
     return (
-        <div style={order}>
+        <Box style={order}>
             <p style={orderArgument}>{currencyPair}</p>
             <p style={orderArgument}>{capitalSize}</p>
             <p style={orderArgument}>{creditLeverage}</p>
@@ -31,7 +32,7 @@ const Order = ({
             <p style={orderArgument}>{transactionType}</p>
             <p style={orderArgument}>{startDate}</p>
             <p style={orderArgument}>{endDate}</p>
-        </div>
+        </Box>
     )
 }
 
